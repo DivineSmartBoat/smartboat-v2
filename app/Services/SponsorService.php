@@ -7,6 +7,11 @@ use App\Models\MemberProfile;
 class SponsorService
 {
     /**
+     * Permanent Admin Smart ID
+     */
+    private const DEFAULT_ADMIN_SMART_ID = 'ADMIN0001';
+
+    /**
      * Find Sponsor by Smart ID
      */
     public static function findBySmartId(?string $smartId): ?MemberProfile
@@ -15,24 +20,54 @@ class SponsorService
             return null;
         }
 
-        return MemberProfile::where('smart_id', trim($smartId))->first();
+        return MemberProfile::where(
+            'smart_id',
+            trim($smartId)
+        )->first();
     }
 
     /**
-     * Get Database ID from Smart ID
+     * Default Admin Sponsor
      */
-    public static function getIdFromSmartId(?string $smartId): ?int
+    public static function getDefaultSponsor(): ?MemberProfile
     {
-        $member = self::findBySmartId($smartId);
-
-        return $member?->id;
+        return self::findBySmartId(
+            self::DEFAULT_ADMIN_SMART_ID
+        );
     }
 
     /**
-     * Check Sponsor Exists
+     * Resolve Sponsor
      */
-    public static function exists(?string $smartId): bool
-    {
+    public static function resolve(
+        string $sponsorType,
+        ?string $smartId
+    ): ?MemberProfile {
+
+        if ($sponsorType === 'with_sponsor') {
+            return self::findBySmartId($smartId);
+        }
+
+        return self::getDefaultSponsor();
+    }
+
+    /**
+     * Get Database ID
+     */
+    public static function getIdFromSmartId(
+        ?string $smartId
+    ): ?int {
+
+        return self::findBySmartId($smartId)?->id;
+    }
+
+    /**
+     * Sponsor Exists
+     */
+    public static function exists(
+        ?string $smartId
+    ): bool {
+
         return self::findBySmartId($smartId) !== null;
     }
 }

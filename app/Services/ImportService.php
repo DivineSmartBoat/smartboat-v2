@@ -11,6 +11,19 @@ class ImportService
      */
     public static function save(array $data): MemberProfile
     {
+        /*
+        |----------------------------------------------------------
+        | Skip Test Data
+        |----------------------------------------------------------
+        */
+
+        if (
+            !empty($data['is_test_data']) &&
+            $data['is_test_data']
+        ) {
+            throw new \Exception('Test Data Cannot Be Imported Into Production.');
+        }
+
         return MemberProfile::updateOrCreate(
 
             [
