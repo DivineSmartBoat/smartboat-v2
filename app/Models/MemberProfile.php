@@ -11,30 +11,27 @@ class MemberProfile extends Model
     use Notifiable;
 
     protected $fillable = [
-        'smart_id',
-        'full_name',
-        'email',
-        'country_code',
-        'mobile',
-        'date_of_birth',
-        'gender',
-        'real_sponsor_id',
-        'rising_sponsor_id',
-        'real_sponsor_smart_id',
-        'rising_sponsor_smart_id',
-        'password',
-        'transaction_password',
-        'terms',
-        'is_active',
-        'registration_datetime',
-        'first_purchase_datetime',   ];
-'last_purchase_datetime',
-'purchase_count',
-'total_purchase_amount',
-    protected $hidden = [
-        'password',
-        'transaction_password',
-    ];
+    'smart_id',
+    'full_name',
+    'email',
+    'country_code',
+    'mobile',
+    'date_of_birth',
+    'gender',
+    'real_sponsor_id',
+    'rising_sponsor_id',
+    'real_sponsor_smart_id',
+    'rising_sponsor_smart_id',
+    'password',
+    'transaction_password',
+    'terms',
+    'is_active',
+    'registration_datetime',
+    'first_purchase_datetime',
+    'last_purchase_datetime',
+    'purchase_count',
+    'total_purchase_amount',
+];
 
     protected $casts = [
     'date_of_birth' => 'date',
