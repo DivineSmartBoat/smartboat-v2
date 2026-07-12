@@ -33,7 +33,12 @@ class MemberProfile extends Model
     'total_purchase_amount',
 ];
 
-    protected $casts = [
+protected $hidden = [
+    'password',
+    'transaction_password',
+];
+
+protected $casts = [
     'date_of_birth' => 'date',
     'terms' => 'boolean',
     'is_active' => 'boolean',
@@ -69,4 +74,6 @@ public function risingSponsor()
         self::class,
         'rising_sponsor_id'
     );
+}
+
 }
