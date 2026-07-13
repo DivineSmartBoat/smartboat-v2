@@ -5,7 +5,7 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Admin\PurchaseImportController;
 use App\Http\Controllers\Admin\ITCController;
-
+use App\Console\Commands\ImportMembers;
 Route::get('/api/sponsor-search', [RegisterController::class, 'sponsorSearch'])
     ->name('api.sponsor.search');
 
@@ -55,3 +55,11 @@ Route::get('/admin/itc', [ITCController::class, 'index'])
 
 Route::get('/admin/itc/{smart_id}', [ITCController::class, 'show'])
     ->name('itc.show');
+
+Route::get('/admin/import-members', function () {
+
+    $command = new ImportMembers();
+
+    return $command->handle();
+
+});
