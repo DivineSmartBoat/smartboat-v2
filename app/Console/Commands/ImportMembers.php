@@ -78,19 +78,21 @@ class ImportMembers extends Command
 
                 $imported++;
 
-            } catch (\Throwable $e) {
+catch (\Throwable $e) {
 
-                $skipped++;
+    $skipped++;
 
-                $this->warn($e->getMessage());
+    echo "<pre>";
+    echo $e->getMessage();
+    echo "</pre>";
 
-            }
-        }
+}
+echo "<h3>Import Finished</h3>";
 
-        $this->newLine();
+echo "Imported : {$imported}<br>";
 
-        $this->info("Imported : {$imported}");
-        $this->info("Skipped  : {$skipped}");
+echo "Skipped : {$skipped}<br>";
+ 
 
         return self::SUCCESS;
     }
