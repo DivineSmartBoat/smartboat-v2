@@ -48,6 +48,11 @@ class ImportMembers extends Command
 
 try {
 
+    echo "<pre>";
+    var_dump($data['join date']);
+    echo "</pre>";
+    die();
+
     MemberImportService::import([
 
         'smart_id'                => trim($data['member id'] ?? ''),
@@ -77,7 +82,6 @@ try {
     ]);
 
     $imported++;
-
 } catch (\Throwable $e) {
 
     $skipped++;
