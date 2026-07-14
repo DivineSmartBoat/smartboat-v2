@@ -46,45 +46,46 @@ class ImportMembers extends Command
 
             $data = array_combine($header, $row);
 
-            try {
+try {
 
-                MemberImportService::import([
+    MemberImportService::import([
 
-                    'smart_id'               => trim($data['member id'] ?? ''),
-                    'full_name'              => trim($data['name'] ?? ''),
-                    'email'                  => strtolower(trim($data['email'] ?? '')),
-                    'country_code'           => '+91',
-                    'mobile'                 => preg_replace('/[^0-9]/', '', $data['phone'] ?? ''),
+        'smart_id'                => trim($data['member id'] ?? ''),
+        'full_name'               => trim($data['name'] ?? ''),
+        'email'                   => strtolower(trim($data['email'] ?? '')),
+        'country_code'            => '+91',
+        'mobile'                  => preg_replace('/[^0-9]/', '', $data['phone'] ?? ''),
 
-                    'real_sponsor_smart_id'  => trim($data['sponsor'] ?? ''),
-                    'rising_sponsor_smart_id'=> null,
+        'real_sponsor_smart_id'   => trim($data['sponsor'] ?? ''),
+        'rising_sponsor_smart_id' => null,
 
-                    'password'               => 'Temp@12345',
-                    'transaction_password'   => 'Txn@12345',
+        'password'                => 'Temp@12345',
+        'transaction_password'    => 'Txn@12345',
 
-                    'terms'                  => true,
+        'terms'                   => true,
 
-                    'is_active' => strtolower(trim($data['status'] ?? '')) === 'active',
+        'is_active' => strtolower(trim($data['status'] ?? '')) === 'active',
 
-                    'registration_datetime'  => !empty($data['join date'])
-                        ? date('Y-m-d H:i:s', strtotime($data['join date']))
-                        : null,
+        'registration_datetime' => !empty($data['join date'])
+            ? date('Y-m-d H:i:s', strtotime($data['join date']))
+            : null,
 
-                    'first_purchase_datetime' => null,
+        'first_purchase_datetime' => null,
 
-                    'is_test_data' => false,
+        'is_test_data' => false,
 
-                ]);
+    ]);
 
-                $imported++;
+    $imported++;
 
-catch (\Throwable $e) {
+} catch (\Throwable $e) {
 
     $skipped++;
 
     echo "<pre>";
     echo $e->getMessage();
     echo "</pre>";
+}
 
 }
 echo "<h3>Import Finished</h3>";
@@ -92,8 +93,8 @@ echo "<h3>Import Finished</h3>";
 echo "Imported : {$imported}<br>";
 
 echo "Skipped : {$skipped}<br>";
- 
 
-        return self::SUCCESS;
+return self::SUCCESS;
     }
+
 }
