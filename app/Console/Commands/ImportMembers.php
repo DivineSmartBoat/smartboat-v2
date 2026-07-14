@@ -48,10 +48,7 @@ class ImportMembers extends Command
 
 try {
 
-    echo "<pre>";
-    var_dump($data['join date']);
-    echo "</pre>";
-    die();
+
 
     MemberImportService::import([
 
@@ -71,9 +68,9 @@ try {
 
         'is_active' => strtolower(trim($data['status'] ?? '')) === 'active',
 
-        'registration_datetime' => !empty($data['join date'])
-            ? date('Y-m-d H:i:s', strtotime($data['join date']))
-            : null,
+    'registration_datetime' => !empty($data['join date'])
+    ? \Carbon\Carbon::createFromFormat('d/m/Y h:i:s A', trim($data['join date']))->format('Y-m-d H:i:s')
+    : null,
 
         'first_purchase_datetime' => null,
 
